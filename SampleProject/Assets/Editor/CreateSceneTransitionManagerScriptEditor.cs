@@ -8,12 +8,7 @@ using UnityEngine;
 public class CreateSceneTransitionManagerScriptEditor
 {
     private const string kMenuDirectory = "AiginaCoder/Create/MakeSceneTransitionManagerScript";
-    private const string kScriptSavePath = "Assets/Scripts/SceneTransitionManager.cs";
-    // 保存先
-    private static readonly string kFileName = Path.GetFileName (kScriptSavePath);
-    // ファイル名(拡張子あり)
-    private static readonly string kFileNameWithExtension = Path.GetFileNameWithoutExtension (kScriptSavePath);
-    // ファイル名(拡張子なし)
+    private const string kScriptSavePath = "Assets/Scripts/SceneTransitionManager.cs"; // 保存先
 
     [MenuItem (CreateSceneTransitionManagerScriptEditor.kMenuDirectory)]
     static void OnSelect ()
@@ -28,8 +23,8 @@ public class CreateSceneTransitionManagerScriptEditor
     {
         var builder = new StringBuilder ();
 
-        builder.Append (@"
-using System.Collections.Generic;
+        builder.Append (
+@"using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 namespace AC {
@@ -49,7 +44,7 @@ namespace AC {
             if (i == sceneNamesLength - 1) {
                 builder.AppendFormat ("        {0}", sceneNames [i]);
             } else {
-                builder.AppendFormat ("        {0},", sceneNames [i]); 
+                builder.AppendFormat ("        {0},\n", sceneNames [i]); 
             }
         }
         builder.Append (@"
@@ -71,9 +66,9 @@ namespace AC {
         for (var i = 0; i < sceneNamesLength; i++) {
             // 最後のシーン名ならば
             if (i == sceneNamesLength - 1) {
-                builder.AppendFormat (@"        {{SceneID.{0}, ""{0}""}}", sceneNames [i]);
+                builder.AppendFormat ("        {{SceneID.{0}, \"{0}\"}}", sceneNames [i]);
             } else {
-                builder.AppendFormat (@"        {{SceneID.{0}, ""{0}""}},", sceneNames [i]);
+                builder.AppendFormat ("        {{SceneID.{0}, \"{0}\"}},\n", sceneNames [i]);
             }
         }
         builder.Append (@"
